@@ -1,0 +1,13 @@
+-- execute get_employee_name(104);
+
+-- execute test_boolean_flag(100);
+
+
+-- select salary from employees where employee_id = 100;
+
+
+-- SELECT object_name, object_type
+-- FROM user_objects
+-- WHERE object_type IN ('PROCEDURE', 'FUNCTION', 'PACKAGE', 'PACKAGE BODY')
+-- ORDER BY object_name;
+
