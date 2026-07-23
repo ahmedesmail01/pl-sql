@@ -15,8 +15,12 @@
 -- execute retire_employees_with_salary_above2(23000);
 
 
-select * from retired_employees ;
+-- select * from retired_employees ;
 
 -- execute get_by_manager(100);
+
+-- select salary from employees;
+
+
 
 
