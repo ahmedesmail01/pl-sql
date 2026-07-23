@@ -160,7 +160,8 @@
 --handle exceptions in pl/sql
 --------------------------------------------
 
-select * from employees;
+select *
+  from employees;
 
 
 -- DECLARE 
@@ -207,35 +208,72 @@ select * from employees;
 -- );
 
 
-select * from trace_errors;
+-- select * from trace_errors;
 
 
 
-DECLARE 
-
-
-
-
-    l_error_message trace_errors.error_message%TYPE;
-    l_error_code    trace_errors.error_code%TYPE;
-
-BEGIN
-
-    delete from departments where department_id = 60;
-
-
-
-    EXCEPTION
-
-    when others then 
-    l_error_message := SQLERRM;
-    l_error_code := SQLCODE;
-    insert into trace_errors (error_message, error_code)
-    values (l_error_message, l_error_code);
-    -- commit;
-
-    END;
+-- DECLARE 
 
 
 
 
+--     l_error_message trace_errors.error_message%TYPE;
+--     l_error_code    trace_errors.error_code%TYPE;
+
+-- BEGIN
+
+--     delete from departments where department_id = 60;
+
+
+
+--     EXCEPTION
+
+--     when others then 
+--     l_error_message := SQLERRM;
+--     l_error_code := SQLCODE;
+--     insert into trace_errors (error_message, error_code)
+--     values (l_error_message, l_error_code);
+--     -- commit;
+
+--     END;
+
+
+
+--------------------------------------------------------
+-- Raise application error in pl/sql
+--------------------------------------------------------
+
+declare
+   v_depno number := 16;
+    -- e_dept_not_found EXCEPTION;
+
+begin
+   update departments
+      set
+      department_name = 'New Department'
+    where department_id = v_depno;
+    -- if SQL%NOTFOUND then 
+    -- RAISE e_dept_not_found;
+    -- end if;
+
+   if sql%notfound then
+      raise_application_error(
+         -20002,
+         'Department with ID '
+         || v_depno
+         || ' not found.'
+      );
+   end if;
+   commit;
+
+
+
+
+-- EXCEPTION
+
+-- when e_dept_not_found then
+--     dbms_output.put_line('Department with ID ' || v_depno || ' not found.');
+end;
+
+
+-- select * from departments where department_id = 100;
