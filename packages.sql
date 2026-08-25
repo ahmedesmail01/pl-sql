@@ -22,8 +22,19 @@ create or replace package body emp_pack  is
         v_salary employees.salary%type;
         begin
             select salary into v_salary from employees where employee_id = e_id;
+            DBMS_OUTPUT.PUT_LINE('salary of employee with id: ' || e_id || 'equals' || v_salary);
             return v_salary;
 
         end get_salary ;
     end emp_pack;
     /
+
+
+declare
+v_sal employees.salary%type := 0;
+begin 
+
+    v_sal := emp_pack.GET_SALARY(100);
+    EMP_PACK.HIRE_EMP('ahmed', 20000);
+    
+end;
