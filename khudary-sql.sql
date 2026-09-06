@@ -122,3 +122,21 @@ describe user_tab_columns;
 describe user_constraints;
 
 select * from user_constraints where table_name = 'EMPLOYEES';
+
+create sequence emp_seq start with 1 increment by 1;
+
+
+create table EM (
+    emp_id number default emp_seq.nextval primary key,
+    emp_name varchar2(100) not null,
+    emp_salary number not null,
+
+    constraint salary_check check (emp_salary > 0)
+);
+
+insert into EM (emp_name, emp_salary) values ('John Doe', 50000);
+insert into EM (emp_name, emp_salary) values ('Jane Smith', 60000);
+
+commit;
+
+select * from EM;
