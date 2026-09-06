@@ -113,3 +113,10 @@ describe user_tab_columns;
 describe user_constraints;
 
 select * from user_constraints where table_name = 'EMPLOYEES';
+
+select * from dictionary order by 1;
+
+select * from cat;
+
+select * from user_constraints where table_name like 'DEP%';
+select * from user_constraints where table_name like 'EMP%';
