@@ -247,4 +247,4 @@ rem
 rem Exit from the session.
 rem Use 'exit' and not 'disconnect' to keep behavior the same for when errors occur.
 rem
-exit
+-- exit

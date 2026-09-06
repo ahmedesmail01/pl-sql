@@ -101,6 +101,7 @@ select email , to_char(hire_date, 'dd-mm-yyyy') as hire_date from employees_copy
 
 rename employees_copy to employees_backup;
 
+<<<<<<< HEAD
 create table dept_backup as select * from departments where 1=3;
 
 select * from dept_backup;
@@ -110,3 +111,17 @@ desc dept_backup;
 select * from employees_backup  order by first_name fetch first 9 percent rows with ties;
 
 select table_name from USER_TABLES;
+=======
+
+select table_name from user_tables where table_name like 'EMP%';
+
+select * from user_objects ;
+
+select * from tabs;
+
+describe user_tab_columns;
+
+describe user_constraints;
+
+select * from user_constraints where table_name = 'EMPLOYEES';
+>>>>>>> cfcb563372cd41bc556963280d0b8640c0e51f1e
