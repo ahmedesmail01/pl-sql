@@ -97,6 +97,16 @@ rollback;
 
 select * from employees_copy;  
 
-select email , to_date(hire_date, 'dd-mm-yyyy') as hire_date from employees_copy where hire_date > to_date('05-09-2016', 'dd-mm-yyyy') order by hire_date;
+select email , to_char(hire_date, 'dd-mm-yyyy') as hire_date from employees_copy where hire_date > to_date('05-09-2016', 'dd-mm-yyyy') order by hire_date;
 
 rename employees_copy to employees_backup;
+
+create table dept_backup as select * from departments where 1=3;
+
+select * from dept_backup;
+
+desc dept_backup;
+
+select * from employees_backup  order by first_name fetch first 9 percent rows with ties;
+
+select table_name from USER_TABLES;
