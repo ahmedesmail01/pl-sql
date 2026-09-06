@@ -100,3 +100,16 @@ select * from employees_copy;
 select email , to_date(hire_date, 'dd-mm-yyyy') as hire_date from employees_copy where hire_date > to_date('05-09-2016', 'dd-mm-yyyy') order by hire_date;
 
 rename employees_copy to employees_backup;
+
+
+select table_name from user_tables where table_name like 'EMP%';
+
+select * from user_objects ;
+
+select * from tabs;
+
+describe user_tab_columns;
+
+describe user_constraints;
+
+select * from user_constraints where table_name = 'EMPLOYEES';
