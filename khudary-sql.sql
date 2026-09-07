@@ -97,10 +97,19 @@ rollback;
 
 select * from employees_copy;  
 
-select email , to_date(hire_date, 'dd-mm-yyyy') as hire_date from employees_copy where hire_date > to_date('05-09-2016', 'dd-mm-yyyy') order by hire_date;
+select email , to_char(hire_date, 'dd-mm-yyyy') as hire_date from employees_copy where hire_date > to_date('05-09-2016', 'dd-mm-yyyy') order by hire_date;
 
 rename employees_copy to employees_backup;
 
+create table dept_backup as select * from departments where 1=3;
+
+select * from dept_backup;
+
+desc dept_backup;
+
+select * from employees_backup  order by first_name fetch first 9 percent rows with ties;
+
+select table_name from USER_TABLES;
 
 select table_name from user_tables where table_name like 'EMP%';
 
@@ -120,3 +129,20 @@ select * from cat;
 
 select * from user_constraints where table_name like 'DEP%';
 select * from user_constraints where table_name like 'EMP%';
+create sequence emp_seq start with 1 increment by 1;
+
+
+create table EM (
+    emp_id number default emp_seq.nextval primary key,
+    emp_name varchar2(100) not null,
+    emp_salary number not null,
+
+    constraint salary_check check (emp_salary > 0)
+);
+
+insert into EM (emp_name, emp_salary) values ('John Doe', 50000);
+insert into EM (emp_name, emp_salary) values ('Jane Smith', 60000);
+
+commit;
+
+select * from EM;
