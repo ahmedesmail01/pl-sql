@@ -146,3 +146,57 @@ insert into EM (emp_name, emp_salary) values ('Jane Smith', 60000);
 commit;
 
 select * from EM;
+
+create synonym emp_syn for employees;
+
+select * from emp_syn;
+
+commit;
+
+select * from user_synonyms;
+
+create public synonym emp_syn_public for employees;
+
+create table emp_test (
+    emp_id number CONSTRAINT emp_id_const primary key ,
+    emp_name varchar2(100) not null,
+    emp_salary number not null,
+    emp_mail varchar2(100) constraint emp_mail_const unique 
+);
+
+create index emp_id_idx on emp_test(emp_id);
+create index emp_name_idx on emp_test(emp_name);
+create index emp_mail_idx on emp_test(emp_mail);
+
+select * from user_indexes where table_name = 'EMP_TEST';
+
+select * from emp_test;
+
+drop table emp_test;
+
+select * from EMP_DETAILS_VIEW;
+
+create or replace view emp_v_10 as select * from employees where department_id = 10;
+create or replace view emp_v_all as select * from employees ;
+
+select * from emp_v_10;
+select * from emp_v_all where department_id is null;
+
+insert into emp_v_10 (employee_id, first_name, last_name, email, hire_date, job_id, salary, department_id) values (9999, 'Test', 'User', 'test.user@example.com', SYSDATE, 'IT_PROG', 5000, 10);
+
+
+create global temporary table cart (
+    item_id number,
+    item_name varchar2(100),
+    quantity number
+) on commit delete rows;
+
+insert into cart (item_id, item_name, quantity) values (1, 'Laptop', 2);
+insert into cart (item_id, item_name, quantity) values (2, 'Mouse', 5);
+
+select * from cart;
+
+commit;
+
+
+select * from all_directories;
