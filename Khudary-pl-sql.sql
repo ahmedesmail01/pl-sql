@@ -75,3 +75,46 @@ end if;
 end;
 /
 
+
+-- collections
+
+
+declare 
+
+type tab_no is table of varchar2(100) 
+index by pls_integer;
+
+v_tab tab_no;
+
+begin 
+
+v_tab(1) := 'Ahmed';
+v_tab(2) := 'Esmail';   
+v_tab(5) := 'Nasr';
+
+dbms_output.put_line('my full name is : ' || v_tab(1) || ' ' || v_tab(5) || ' ' || v_tab(2));
+
+
+end;
+/
+
+
+-- nested table
+
+
+declare
+type loc_type is table of varchar2(200);
+
+v_loc loc_type := loc_type('cairo', 'alex', 'giza');
+begin 
+
+dbms_output.put_line('my locations are : ' || v_loc(1) || ' ' || v_loc(2) || ' ' || v_loc(3));
+
+
+v_loc.extend();
+v_loc(4) := 'Gharbia';
+dbms_output.put_line('my city  : ' || v_loc(4));
+
+
+end;
+/
