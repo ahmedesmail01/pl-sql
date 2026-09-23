@@ -23,7 +23,7 @@ end;
 
 declare
  
- variable v_sal employees.salary%type;
+--  variable v_sal employees.salary%type;
 
 
 begin
@@ -118,3 +118,25 @@ dbms_output.put_line('my city  : ' || v_loc(4));
 
 end;
 /
+
+select * from departments;
+
+declare 
+
+cursor marketing_emps is select * from employees where department_id = 20;
+
+begin
+
+-- select * from marketing_emps;
+-- dbms_output.put_line(marketing_emps);
+-- marketing_emps;
+
+for emp in marketing_emps loop
+dbms_output.put_line('Employee Name: ' || emp.first_name || ' ' || emp  
+.last_name);
+end loop;
+
+end;
+/
+
+
