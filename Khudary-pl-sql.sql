@@ -123,7 +123,7 @@ select * from departments;
 
 declare 
 
-cursor marketing_emps is select * from employees where department_id = 20;
+cursor marketing_emps is select * from employees where department_id = 30;
 
 begin
 
@@ -131,12 +131,47 @@ begin
 -- dbms_output.put_line(marketing_emps);
 -- marketing_emps;
 
+-- open marketing_emps;
+
 for emp in marketing_emps loop
 dbms_output.put_line('Employee Name: ' || emp.first_name || ' ' || emp  
 .last_name);
 end loop;
 
+-- marketing_emps%rowcount;
+-- dbms_output.put_line(marketing_emps%rowcount );
+-- dbms_output.put_line(marketing_emps%isopen );
+
+if marketing_emps%isopen then
+dbms_output.put_line('Cursor is open');
+
+else    
+dbms_output.put_line('Cursor is closed');
+end if;
+
+
+end;
+/   
+
+
+select * from employees where department_id = 20;
+
+declare 
+
+
+cursor marketing_emps is select * from employees where department_id = 20 for update;
+
+begin 
+
+    for emp in marketing_emps loop
+        update employees set salary = salary + 100
+        where current of marketing_emps;
+
+    end loop;
+
 end;
 /
+
+
 
 
