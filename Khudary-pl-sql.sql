@@ -198,3 +198,68 @@ exception
       dbms_output.put_line('No employee found with the given ID');
 end;
 /
+
+
+
+select * from user_source where name like 'update%' ;
+
+
+-- create or replace procedure update_salary (
+--     p_emp_id     in employees.employee_id%type,
+--     p_new_salary in employees.salary%type
+-- ) is
+-- begin
+--     if p_emp_id is null then
+--         raise_application_error(-20001, 'Employee ID is required');
+--     end if;
+
+--     if p_new_salary is null or p_new_salary <= 0 then
+--         raise_application_error(
+--             -20002,
+--             'Salary must be greater than zero'
+--         );
+--     end if;
+
+--     update employees
+--        set salary = p_new_salary
+--      where employee_id = p_emp_id;
+
+--     if sql%rowcount = 0 then
+--         raise_application_error(
+--             -20003,
+--             'Employee not found: ' || p_emp_id
+--         );
+--     end if;
+-- end update_salary;
+-- /
+
+
+execute update_salary(10, 24000);
+
+select * from employees where EMPLOYEE_ID = 10;
+
+
+create or replace procedure emp_sal_update (
+    p_emp_id in employees.employee_id%type,
+    p_new_salary in employees.salary%type
+) is 
+begin
+    if p_emp_id is null then raise_application_error(-20001 ,'employee id is required');
+    end if ;
+    if p_new_salary is null or 
+        p_new_salary <= 0 
+     then raise_application_error(-20002, 'p_new_salary must be more than 0');
+      end if ;
+
+    update employees 
+    set salary = p_new_salary 
+    where employee_id = p_emp_id;
+
+    if sql%rowcount = 0 then raise_application_error(-20003, 'user with this id not found ' || p_emp_id); 
+    end if;
+
+end;
+/
+
+
+execute emp_sal_update(10, 24000);
