@@ -263,3 +263,14 @@ end;
 
 
 execute emp_sal_update(10, 24000);
+
+
+select * from products;
+
+
+
+
+
+
+
+
