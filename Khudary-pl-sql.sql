@@ -265,7 +265,30 @@ end;
 execute emp_sal_update(10, 24000);
 
 
-select * from products;
+-- select * from products;
+
+create table products (
+   product_id number constraint product_id_const primary key,
+   name varchar2(200) not null,
+   price number not null
+);
+
+
+
+create or replace procedure add_product(
+   p_id number,
+   p_name varchar2(200),
+   p_price number
+) is 
+
+begin 
+   insert into products values (p_id, p_name, p_price );
+   dbms_output.put_line(p_id || ' ' || p_name || ' ' || p_price || 'inserted');
+end;
+/
+
+
+
 
 
 

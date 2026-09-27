@@ -200,3 +200,53 @@ commit;
 
 
 select * from all_directories;
+
+
+select * from products;
+
+
+
+
+-- create or replace procedure add_product(
+--    p_id  number,
+--    p_name varchar2,
+--    p_price number
+-- ) is 
+
+-- begin 
+--    insert into products values (p_id, p_name, p_price );
+--    dbms_output.put_line(p_id || ' ' || p_name || ' ' || p_price || 'inserted');
+-- end;
+-- /
+
+
+CREATE OR REPLACE PROCEDURE add_product(
+    p_id in products.product_id%TYPE,
+    p_name in products.name%TYPE,
+    p_price in products.price%TYPE,
+) is 
+
+begin 
+
+
+    insert into products (products.product_id, products.name, products.price)
+    values (p_id, p_name, p_price);
+
+    DBMS_OUTPUT.PUT_LINE(
+        'Product ' || p_id || ' (' || p_name || ') inserted.'
+    );
+
+end add_product;
+/
+
+
+declare 
+
+begin 
+
+     add_product(1, 'one', 50);
+
+  
+
+end;
+/
